@@ -1,5 +1,3 @@
-<!-- The full HTML file will be too large for a single chat response, but here's a deeply expanded section for "Variables & Data Types" as a template. You can request the next section, and I'll keep building out each topic in the same exhaustive style. -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
