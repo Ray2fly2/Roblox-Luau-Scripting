@@ -3,497 +3,154 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Roblox Luau Scripting Encyclopedia</title>
+<title>Roblox Luau Encyclopedia</title>
 <style>
   body {
-    margin: 0; font-family: monospace; background: #121212; color: #eee;
-    display: flex; height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    background: #121212;
+    color: #eee;
   }
   #sidebar {
-    width: 280px; background: #222; padding: 10px;
-    overflow-y: auto; border-right: 1px solid #444;
+    width: 280px;
+    background: #1f1f1f;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    overflow-y: auto;
   }
-  #sidebar h2 { font-size: 20px; margin: 15px 0; color: #0ff;}
   #sidebar button {
-    display: block; width: 100%; margin: 5px 0;
-    background: #333; border: none; color: #eee; padding: 10px;
-    cursor: pointer; text-align: left; border-radius: 4px;
+    background: transparent;
+    border: none;
+    color: #ccc;
+    padding: 15px 25px;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
+    outline: none;
   }
-  #sidebar button:hover { background: #0ff; color: #000; }
+  #sidebar button:hover {
+    background: #333;
+    color: #0ff;
+  }
+  #sidebar button.active {
+    background: #0ff;
+    color: #000;
+    border-left: 4px solid #0ff;
+    font-weight: bold;
+  }
   #content {
-    flex: 1; padding: 20px; overflow-y: auto;
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: auto;
+    line-height: 1.6;
   }
   pre {
-    background: #222; padding: 15px; border-radius: 5px; overflow-x: auto;
+    background: #222;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 14px;
+    white-space: pre-wrap;
+    word-break: break-word;
   }
-  h1,h2,h3,p { margin: 10px 0; }
+  h1 {
+    margin-top: 0;
+  }
 </style>
 </head>
 <body>
 
 <div id="sidebar">
-  <h2>Luau Topics</h2>
-  <button onclick="showTopic('variables')">Variables</button>
-  <button onclick="showTopic('operators')">Operators</button>
-  <button onclick="showTopic('conditionals')">If Statements</button>
-  <button onclick="showTopic('loops')">Loops</button>
+  <button class="active" onclick="showTopic('variables')">Variables</button>
   <button onclick="showTopic('functions')">Functions</button>
-  <button onclick="showTopic('tables')">Tables</button>
-  <button onclick="showTopic('player')">Player Basics</button>
+  <button onclick="showTopic('loops')">Loops</button>
   <button onclick="showTopic('events')">Events</button>
-  <button onclick="showTopic('gui')">GUI</button>
-  <button onclick="showTopic('remotes')">RemoteEvents/Functions</button>
-  <button onclick="showTopic('datastore')">DataStore</button>
-  <button onclick="showTopic('tween')">TweenService</button>
-  <button onclick="showTopic('pathfinding')">Pathfinding</button>
-  <button onclick="showTopic('contextaction')">ContextActionService</button>
-  <button onclick="showTopic('marketplace')">MarketplaceService</button>
-  <button onclick="showTopic('modules')">ModuleScripts</button>
-  <button onclick="showTopic('debounce')">Debounce</button>
-  <button onclick="showTopic('raycast')">Raycasting</button>
-  <button onclick="showTopic('camera')">Camera</button>
-  <button onclick="showTopic('animationevents')">Animation Events</button>
-  <button onclick="showTopic('sound')">SoundService</button>
-  <button onclick="showTopic('lighting')">Lighting</button>
-  <button onclick="showTopic('constraints')">Physics Constraints</button>
-  <button onclick="showTopic('userinput')">UserInputService</button>
-  <button onclick="showTopic('http')">HttpService</button>
+  <button onclick="showTopic('metatables')">Metatables (OOP)</button>
+  <button onclick="showTopic('bindables')">BindableEvents & Functions</button>
+  <button onclick="showTopic('collectionservice')">CollectionService</button>
+  <button onclick="showTopic('runservice')">RunService</button>
+  <button onclick="showTopic('starterScripts')">Starter Scripts</button>
+  <button onclick="showTopic('humanoidstates')">Humanoid States</button>
+  <button onclick="showTopic('collisiongroups')">CollisionGroups</button>
+  <button onclick="showTopic('attributes')">Attributes</button>
+  <button onclick="showTopic('mathlib')">Math Library</button>
+  <button onclick="showTopic('debuglib')">Debug Library</button>
+  <button onclick="showTopic('enums')">Enums</button>
 </div>
 
 <div id="content">
   <h1>Welcome to Roblox Luau Encyclopedia</h1>
-  <p>Select a topic on the left to study with simplified explanations and examples.</p>
+  <p>Select a topic from the left to begin learning.</p>
 </div>
 
 <script>
 const topics = {
-variables: { title:"Variables", content:`
+  variables: `
 <pre>
-local playerName = "Ray"
-local score = 50
-local isAlive = true
-local inventory = {}
-local nothingHere = nil
-</pre>`},
+-- VARIABLES
+local x = 5 -- stores a number
+local name = "Ray" -- stores text
+local isCool = true -- stores true or false
+</pre>
+`,
 
-operators: { title:"Operators", content:`
+  functions: `
 <pre>
-print(5 + 3)
-print(10 - 4)
-print(3 * 2)
-print(8 / 4)
-print(2 ^ 3)
-print(10 % 3)
-</pre>`},
-
-conditionals: { title:"If Statements", content:`
-<pre>
-local score = 50
-if score >= 100 then
-  print("High score!")
-elseif score >= 50 then
-  print("Decent score.")
-else
-  print("Low score.")
-end
-</pre>`},
-
-loops: { title:"Loops", content:`
-<pre>
-for i = 1,5 do print(i) end
-
-local x = 1
-while x <= 3 do
-  print(x)
-  x = x + 1
-end
-
-local n = 1
-repeat
-  print(n)
-  n = n + 1
-until n > 3
-</pre>`},
-
-functions: { title:"Functions", content:`
-<pre>
+-- FUNCTIONS
 function greet(name)
-  print("Hello, "..name)
+    print("Hello, "..name)
 end
-greet("Ray")
-</pre>`},
 
-tables: { title:"Tables", content:`
+greet("Ray") -- calls function, prints Hello, Ray
+</pre>
+`,
+
+  loops: `
 <pre>
-local fruits = {"Apple","Banana","Orange"}
-print(fruits[1])
+-- LOOPS
 
-local player = {Name="Ray", Coins=30}
-print(player.Name)
-</pre>`},
+-- For loop (runs 5 times)
+for i = 1,5 do
+    print(i) -- prints 1 2 3 4 5
+end
 
-player: { title:"Player Basics", content:`
+-- While loop (runs while x < 10)
+local x = 1
+while x < 10 do
+    print(x)
+    x = x + 1
+end
+
+-- Repeat until loop
+local num = 1
+repeat
+    print(num)
+    num = num + 1
+until num > 3
+-- prints 1 2 3
+</pre>
+`,
+
+  events: `
 <pre>
-local Players = game:GetService("Players")
-Players.PlayerAdded:Connect(function(player)
-  player.CharacterAdded:Connect(function(character)
-    local humanoid = character:WaitForChild("Humanoid")
-    print(player.Name.."'s humanoid health is "..humanoid.Health)
-  end)
-end)
-</pre>`},
-
-events: { title:"Events", content:`
-<pre>
+-- EVENTS (Roblox specific)
 local part = workspace.Part
+
 part.Touched:Connect(function(hit)
-  local character = hit.Parent
-  local humanoid = character and character:FindFirstChild("Humanoid")
-  if humanoid then
-    print(humanoid.Parent.Name.." touched the part!")
-  end
+    print(hit.Name.." touched the part")
 end)
-</pre>`},
+</pre>
+`,
 
-gui: { title:"GUI", content:`
+  metatables: `
 <pre>
-local button = script.Parent
-button.MouseButton1Click:Connect(function()
-  print("Button clicked!")
-end)
-</pre>`},
+-- METATABLES & OOP (Advanced)
 
-remotes: { title:"RemoteEvents/Functions", content:`
-<pre>
--- Server
-local event = game.ReplicatedStorage:WaitForChild("MyEvent")
-event.OnServerEvent:Connect(function(player, message)
-  print(player.Name.." says: "..message)
-end)
-
--- Client
-event:FireServer("Hello Server!")
-</pre>`},
-
-datastore: { title:"DataStore", content:`
-<pre>
-local DataStoreService = game:GetService("DataStoreService")
-local coinsStore = DataStoreService:GetDataStore("Coins")
-game.Players.PlayerAdded:Connect(function(player)
-  local savedCoins = coinsStore:GetAsync(player.UserId) or 0
-  player.leaderstats.Coins.Value = savedCoins
-end)
-game.Players.PlayerRemoving:Connect(function(player)
-  coinsStore:SetAsync(player.UserId, player.leaderstats.Coins.Value)
-end)
-</pre>`},
-
-tween: { title:"TweenService", content:`
-<pre>
-local TweenService = game:GetService("TweenService")
-local part = workspace.Part
-local tweenInfo = TweenInfo.new(2, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
-local goal = {Position = part.Position + Vector3.new(0,10,0)}
-local tween = TweenService:Create(part, tweenInfo, goal)
-tween:Play()
-</pre>`},
-
-pathfinding: { title:"Pathfinding", content:`
-<pre>
-local PathfindingService = game:GetService("PathfindingService")
-local npc = workspace.NPC
-local target = workspace.Target
-local path = PathfindingService:CreatePath()
-path:ComputeAsync(npc.HumanoidRootPart.Position, target.Position)
-if path.Status == Enum.PathStatus.Success then
-  for _,waypoint in pairs(path:GetWaypoints()) do
-    npc.Humanoid:MoveTo(waypoint.Position)
-    npc.Humanoid.MoveToFinished:Wait()
-  end
-else
-  warn("Pathfinding failed")
-end
-</pre>`},
-
-contextaction: { title:"ContextActionService", content:`
-<pre>
-local ContextActionService = game:GetService("ContextActionService")
-local function onJump(actionName, inputState, inputObject)
-  if inputState == Enum.UserInputState.Begin then
-    print("Jump pressed")
-  end
-end
-ContextActionService:BindAction("JumpAction", onJump, false, Enum.KeyCode.Space)
-</pre>`},
-
-marketplace: { title:"MarketplaceService", content:`
-<pre>
-local MarketplaceService = game:GetService("MarketplaceService")
-local gamePassID = 12345678
-Players.PlayerAdded:Connect(function(player)
-  local ownsPass = MarketplaceService:UserOwnsGamePassAsync(player.UserId, gamePassID)
-  if ownsPass then
-    print(player.Name.." owns the game pass!")
-  else
-    print(player.Name.." does NOT own the game pass.")
-  end
-end)
-</pre>`},
-
-modules: { title:"ModuleScripts", content:`
-<pre>
--- ModuleScript
-local module = {}
-function module.sayHello()
-  print("Hello from module!")
-end
-return module
-
--- Using ModuleScript
-local myModule = require(game.ReplicatedStorage.ModuleScript)
-myModule.sayHello()
-</pre>`},
-
-debounce: { title:"Debounce", content:`
-<pre>
-local debounce = false
-part.Touched:Connect(function(hit)
-  if debounce then return end
-  debounce = true
-  print("Part touched!")
-  wait(1)
-  debounce = false
-end)
-</pre>`},
-
-raycast: { title:"Raycasting", content:`
-<pre>
-local origin = workspace.Part.Position
-local direction = Vector3.new(0, -10, 0)
-local raycastResult = workspace:Raycast(origin, direction)
-if raycastResult then
-  print("Hit: "..raycastResult.Instance.Name)
-else
-  print("Nothing hit")
-end
-</pre>`},
-
-camera: { title:"Camera", content:`
-<pre>
-local camera = workspace.CurrentCamera
-camera.CameraType = Enum.CameraType.Scriptable
-camera.CFrame = CFrame.new(Vector3.new(0,10,0), Vector3.new(0,0,0))
-</pre>`},
-
-animationevents: { title:"Animation Events", content:`
-<pre>
-local anim = Instance.new("Animation")
-anim.AnimationId = "rbxassetid://YOUR_ID"
-local track = humanoid:LoadAnimation(anim)
-track:GetMarkerReachedSignal("EventName"):Connect(function()
-  print("Animation event triggered!")
-end)
-track:Play()
-</pre>`},
-
-sound: { title:"SoundService", content:`
-<pre>
-local sound = Instance.new("Sound")
-sound.SoundId = "rbxassetid://YOUR_SOUND_ID"
-sound.Parent = workspace
-sound:Play()
-</pre>`},
-
-lighting: { title:"Lighting", content:`
-<pre>
-local Lighting = game:GetService("Lighting")
-Lighting.TimeOfDay = "12:00:00"
-Lighting.FogEnd = 100
-Lighting.Brightness = 2
-Lighting.Ambient = Color3.new(1,0.5,0.5)
-</pre>`},
-
-constraints: { title:"Physics Constraints", content:`
-<pre>
-local hinge = Instance.new("HingeConstraint")
-hinge.Parent = workspace.Part
-hinge.Attachment0 = workspace.Part.Attachment
-hinge.LimitsEnabled = true
-hinge.UpperAngle = 45
-hinge.LowerAngle = -45
-</pre>`},
-
-userinput: { title:"UserInputService", content:`
-<pre>
-local UserInputService = game:GetService("UserInputService")
-UserInputService.InputBegan:Connect(function(input, processed)
-  if processed then return end
-  if input.KeyCode == Enum.KeyCode.Space then
-    print("Spacebar pressed")
-  end
-end)
-</pre>`},
-
-http: { title:"HttpService", content:`
-<pre>
-local HttpService = game:GetService("HttpService")
-local url = "https://example.com/api"
-local data = {score = 100}
-local jsonData = HttpService:JSONEncode(data)
-local response = HttpService:PostAsync(url, jsonData, Enum.HttpContentType.ApplicationJson)
-print("Response: "..response)
-</pre>`}
-}
-
-function showTopic(topic){
-  const c = document.getElementById("content")
-  c.innerHTML = "<h1>"+topics[topic].title+"</h1>"+topics[topic].content
-}
-</script>
-
-</body>
-</html>
-bindables: {
-  title: "BindableEvents & BindableFunctions",
-  content: `
-<pre>
--- BindableEvent
-local be = Instance.new("BindableEvent")
-be.Event:Connect(function(msg)
-  print("Received: "..msg)
-end)
-be:Fire("Hello Bindable!")
-
--- BindableFunction
-local bf = Instance.new("BindableFunction")
-bf.OnInvoke = function(num)
-  return num * 2
-end
-print("Result: "..bf:Invoke(5)) -- prints 10
-</pre>`
-},
-
-collectionservice: {
-  title: "CollectionService (Tagging Parts)",
-  content: `
-<pre>
-local CollectionService = game:GetService("CollectionService")
-local taggedParts = CollectionService:GetTagged("BouncePad")
-for _,part in pairs(taggedParts) do
-  print(part.Name.." is a bounce pad")
-end
-
--- Add tag
-CollectionService:AddTag(workspace.Part, "BouncePad")
-</pre>`
-},
-
-runservice: {
-  title: "RunService (RenderStepped, Heartbeat)",
-  content: `
-<pre>
-local RunService = game:GetService("RunService")
-
-RunService.RenderStepped:Connect(function(dt)
-  -- runs every frame on client
-end)
-
-RunService.Heartbeat:Connect(function(dt)
-  -- runs every frame on server
-end)
-
-RunService.Stepped:Connect(function(time, dt)
-  -- runs before physics
-end)
-</pre>`
-},
-
-starterScripts: {
-  title: "StarterPlayerScripts vs StarterCharacterScripts",
-  content: `
-<pre>
--- StarterPlayerScripts
--- Scripts placed here run as LocalScripts for the player
-
--- StarterCharacterScripts
--- Scripts placed here run as LocalScripts inside the player's character
-</pre>`
-},
-
-humanoidstates: {
-  title: "Humanoid States (Jumping, Running, etc)",
-  content: `
-<pre>
-local humanoid = workspace.Player.Character:WaitForChild("Humanoid")
-humanoid.StateChanged:Connect(function(old,new)
-  print("Changed from "..old.Name.." to "..new.Name)
-end)
-</pre>`
-},
-
-collisiongroups: {
-  title: "CollisionGroups (Physics Layers)",
-  content: `
-<pre>
-local PhysicsService = game:GetService("PhysicsService")
-PhysicsService:CreateCollisionGroup("Ghosts")
-PhysicsService:SetPartCollisionGroup(workspace.Part, "Ghosts")
-PhysicsService:CollisionGroupSetCollidable("Ghosts", "Default", false)
-</pre>`
-},
-
-attributes: {
-  title: "Attributes (Custom Properties)",
-  content: `
-<pre>
-local part = workspace.Part
-part:SetAttribute("Health", 100)
-print(part:GetAttribute("Health"))
-
-part.AttributeChanged:Connect(function(attr)
-  print(attr.." changed to "..part:GetAttribute(attr))
-end)
-</pre>`
-},
-
-mathlib: {
-  title: "Math Library (Random, Floor, Ceil)",
-  content: `
-<pre>
-print(math.random(1,10)) -- random number 1-10
-print(math.floor(5.8)) -- 5
-print(math.ceil(5.2)) -- 6
-print(math.abs(-7)) -- 7
-print(math.sqrt(16)) -- 4
-print(math.pi) -- 3.1415...
-</pre>`
-},
-
-debuglib: {
-  title: "Debug Library (Traceback)",
-  content: `
-<pre>
-local function myFunction()
-  print(debug.traceback("Here is the traceback"))
-end
-myFunction()
-</pre>`
-},
-
-enums: {
-  title: "Enums (Using Enums)",
-  content: `
-<pre>
-local part = workspace.Part
-part.Material = Enum.Material.Neon
-print(Enum.Material.Neon.Name) -- prints Neon
-</pre>`
-},
-
-metatables: {
-  title: "Metatables (OOP Basics)",
-  content: `
-<pre>
 local Dog = {}
 Dog.__index = Dog
 
@@ -509,5 +166,147 @@ end
 
 local myDog = Dog.new("Rex")
 myDog:Bark()
-</pre>`
-},
+</pre>
+`,
+
+  bindables: `
+<pre>
+-- BindableEvent
+local be = Instance.new("BindableEvent")
+be.Event:Connect(function(msg)
+  print("Received: "..msg)
+end)
+be:Fire("Hello Bindable!")
+
+-- BindableFunction
+local bf = Instance.new("BindableFunction")
+bf.OnInvoke = function(num)
+  return num * 2
+end
+print("Result: "..bf:Invoke(5)) -- prints 10
+</pre>
+`,
+
+  collectionservice: `
+<pre>
+local CollectionService = game:GetService("CollectionService")
+local taggedParts = CollectionService:GetTagged("BouncePad")
+for _,part in pairs(taggedParts) do
+  print(part.Name.." is a bounce pad")
+end
+
+-- Add tag
+CollectionService:AddTag(workspace.Part, "BouncePad")
+</pre>
+`,
+
+  runservice: `
+<pre>
+local RunService = game:GetService("RunService")
+
+RunService.RenderStepped:Connect(function(dt)
+  -- runs every frame on client
+end)
+
+RunService.Heartbeat:Connect(function(dt)
+  -- runs every frame on server
+end)
+
+RunService.Stepped:Connect(function(time, dt)
+  -- runs before physics
+end)
+</pre>
+`,
+
+  starterScripts: `
+<pre>
+-- StarterPlayerScripts
+-- Scripts placed here run as LocalScripts for the player
+
+-- StarterCharacterScripts
+-- Scripts placed here run as LocalScripts inside the player's character
+</pre>
+`,
+
+  humanoidstates: `
+<pre>
+local humanoid = workspace.Player.Character:WaitForChild("Humanoid")
+humanoid.StateChanged:Connect(function(old,new)
+  print("Changed from "..old.Name.." to "..new.Name)
+end)
+</pre>
+`,
+
+  collisiongroups: `
+<pre>
+local PhysicsService = game:GetService("PhysicsService")
+PhysicsService:CreateCollisionGroup("Ghosts")
+PhysicsService:SetPartCollisionGroup(workspace.Part, "Ghosts")
+PhysicsService:CollisionGroupSetCollidable("Ghosts", "Default", false)
+</pre>
+`,
+
+  attributes: `
+<pre>
+local part = workspace.Part
+part:SetAttribute("Health", 100)
+print(part:GetAttribute("Health"))
+
+part.AttributeChanged:Connect(function(attr)
+  print(attr.." changed to "..part:GetAttribute(attr))
+end)
+</pre>
+`,
+
+  mathlib: `
+<pre>
+print(math.random(1,10)) -- random number 1-10
+print(math.floor(5.8)) -- 5
+print(math.ceil(5.2)) -- 6
+print(math.abs(-7)) -- 7
+print(math.sqrt(16)) -- 4
+print(math.pi) -- 3.1415...
+</pre>
+`,
+
+  debuglib: `
+<pre>
+local function myFunction()
+  print(debug.traceback("Here is the traceback"))
+end
+myFunction()
+</pre>
+`,
+
+  enums: `
+<pre>
+local part = workspace.Part
+part.Material = Enum.Material.Neon
+print(Enum.Material.Neon.Name) -- prints Neon
+</pre>
+`
+};
+
+function showTopic(topic) {
+  const content = topics[topic];
+  if (!content) {
+    document.getElementById('content').innerHTML = '<p>Topic not found.</p>';
+    return;
+  }
+  document.getElementById('content').innerHTML = content;
+
+  // Update active button
+  const buttons = document.querySelectorAll('#sidebar button');
+  buttons.forEach(btn => {
+    btn.classList.remove('active');
+  });
+  const activeBtn = Array.from(buttons).find(b => b.textContent.toLowerCase().replace(/ /g, '') === topic);
+  if (activeBtn) activeBtn.classList.add('active');
+}
+
+// Initialize with variables topic
+showTopic('variables');
+</script>
+
+</body>
+</html>
