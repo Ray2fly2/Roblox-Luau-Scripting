@@ -1,2 +1,313 @@
-# roblox-luau-encyclopedia
-My complete Roblox Luau scripting website notes and examples.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Roblox Luau Encyclopedia</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    background: #121212;
+    color: #eee;
+  }
+  #sidebar {
+    width: 280px;
+    background: #1f1f1f;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    overflow-y: auto;
+  }
+  #sidebar button {
+    background: transparent;
+    border: none;
+    color: #ccc;
+    padding: 15px 25px;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
+    outline: none;
+  }
+  #sidebar button:hover {
+    background: #333;
+    color: #0ff;
+  }
+  #sidebar button.active {
+    background: #0ff;
+    color: #000;
+    border-left: 4px solid #0ff;
+    font-weight: bold;
+  }
+  #content {
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: auto;
+    line-height: 1.6;
+  }
+  pre {
+    background: #222;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 14px;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  h1 {
+    margin-top: 0;
+  }
+</style>
+</head>
+<body>
+
+<div id="sidebar">
+  <button class="active" onclick="showTopic('variables')">Variables</button>
+  <button onclick="showTopic('functions')">Functions</button>
+  <button onclick="showTopic('loops')">Loops</button>
+  <button onclick="showTopic('events')">Events</button>
+  <button onclick="showTopic('metatables')">Metatables (OOP)</button>
+  <button onclick="showTopic('bindables')">BindableEvents & Functions</button>
+  <button onclick="showTopic('collectionservice')">CollectionService</button>
+  <button onclick="showTopic('runservice')">RunService</button>
+  <button onclick="showTopic('starterScripts')">Starter Scripts</button>
+  <button onclick="showTopic('humanoidstates')">Humanoid States</button>
+  <button onclick="showTopic('collisiongroups')">CollisionGroups</button>
+  <button onclick="showTopic('attributes')">Attributes</button>
+  <button onclick="showTopic('mathlib')">Math Library</button>
+  <button onclick="showTopic('debuglib')">Debug Library</button>
+  <button onclick="showTopic('enums')">Enums</button>
+</div>
+
+<div id="content">
+  <h1>Welcome to Roblox Luau Encyclopedia</h1>
+  <p>Select a topic from the left to begin learning.</p>
+</div>
+
+<script>
+const topics = {
+  variables: `
+<pre>
+-- VARIABLES
+local x = 5 -- stores a number
+local name = "Ray" -- stores text
+local isCool = true -- stores true or false
+</pre>
+`,
+
+  functions: `
+<pre>
+-- FUNCTIONS
+function greet(name)
+    print("Hello, "..name)
+end
+
+greet("Ray") -- calls function, prints Hello, Ray
+</pre>
+`,
+
+  loops: `
+<pre>
+-- LOOPS
+
+-- For loop (runs 5 times)
+for i = 1,5 do
+    print(i) -- prints 1 2 3 4 5
+end
+
+-- While loop (runs while x < 10)
+local x = 1
+while x < 10 do
+    print(x)
+    x = x + 1
+end
+
+-- Repeat until loop
+local num = 1
+repeat
+    print(num)
+    num = num + 1
+until num > 3
+-- prints 1 2 3
+</pre>
+`,
+
+  events: `
+<pre>
+-- EVENTS (Roblox specific)
+local part = workspace.Part
+
+part.Touched:Connect(function(hit)
+    print(hit.Name.." touched the part")
+end)
+</pre>
+`,
+
+  metatables: `
+<pre>
+-- METATABLES & OOP (Advanced)
+
+local Dog = {}
+Dog.__index = Dog
+
+function Dog.new(name)
+  local self = setmetatable({}, Dog)
+  self.Name = name
+  return self
+end
+
+function Dog:Bark()
+  print(self.Name.." barks!")
+end
+
+local myDog = Dog.new("Rex")
+myDog:Bark()
+</pre>
+`,
+
+  bindables: `
+<pre>
+-- BindableEvent
+local be = Instance.new("BindableEvent")
+be.Event:Connect(function(msg)
+  print("Received: "..msg)
+end)
+be:Fire("Hello Bindable!")
+
+-- BindableFunction
+local bf = Instance.new("BindableFunction")
+bf.OnInvoke = function(num)
+  return num * 2
+end
+print("Result: "..bf:Invoke(5)) -- prints 10
+</pre>
+`,
+
+  collectionservice: `
+<pre>
+local CollectionService = game:GetService("CollectionService")
+local taggedParts = CollectionService:GetTagged("BouncePad")
+for _,part in pairs(taggedParts) do
+  print(part.Name.." is a bounce pad")
+end
+
+-- Add tag
+CollectionService:AddTag(workspace.Part, "BouncePad")
+</pre>
+`,
+
+  runservice: `
+<pre>
+local RunService = game:GetService("RunService")
+
+RunService.RenderStepped:Connect(function(dt)
+  -- runs every frame on client
+end)
+
+RunService.Heartbeat:Connect(function(dt)
+  -- runs every frame on server
+end)
+
+RunService.Stepped:Connect(function(time, dt)
+  -- runs before physics
+end)
+</pre>
+`,
+
+  starterScripts: `
+<pre>
+-- StarterPlayerScripts
+-- Scripts placed here run as LocalScripts for the player
+
+-- StarterCharacterScripts
+-- Scripts placed here run as LocalScripts inside the player's character
+</pre>
+`,
+
+  humanoidstates: `
+<pre>
+local humanoid = workspace.Player.Character:WaitForChild("Humanoid")
+humanoid.StateChanged:Connect(function(old,new)
+  print("Changed from "..old.Name.." to "..new.Name)
+end)
+</pre>
+`,
+
+  collisiongroups: `
+<pre>
+local PhysicsService = game:GetService("PhysicsService")
+PhysicsService:CreateCollisionGroup("Ghosts")
+PhysicsService:SetPartCollisionGroup(workspace.Part, "Ghosts")
+PhysicsService:CollisionGroupSetCollidable("Ghosts", "Default", false)
+</pre>
+`,
+
+  attributes: `
+<pre>
+local part = workspace.Part
+part:SetAttribute("Health", 100)
+print(part:GetAttribute("Health"))
+
+part.AttributeChanged:Connect(function(attr)
+  print(attr.." changed to "..part:GetAttribute(attr))
+end)
+</pre>
+`,
+
+  mathlib: `
+<pre>
+print(math.random(1,10)) -- random number 1-10
+print(math.floor(5.8)) -- 5
+print(math.ceil(5.2)) -- 6
+print(math.abs(-7)) -- 7
+print(math.sqrt(16)) -- 4
+print(math.pi) -- 3.1415...
+</pre>
+`,
+
+  debuglib: `
+<pre>
+local function myFunction()
+  print(debug.traceback("Here is the traceback"))
+end
+myFunction()
+</pre>
+`,
+
+  enums: `
+<pre>
+local part = workspace.Part
+part.Material = Enum.Material.Neon
+print(Enum.Material.Neon.Name) -- prints Neon
+</pre>
+`
+};
+
+function showTopic(topic) {
+  const content = topics[topic];
+  if (!content) {
+    document.getElementById('content').innerHTML = '<p>Topic not found.</p>';
+    return;
+  }
+  document.getElementById('content').innerHTML = content;
+
+  // Update active button
+  const buttons = document.querySelectorAll('#sidebar button');
+  buttons.forEach(btn => {
+    btn.classList.remove('active');
+  });
+  const activeBtn = Array.from(buttons).find(b => b.textContent.toLowerCase().replace(/ /g, '') === topic);
+  if (activeBtn) activeBtn.classList.add('active');
+}
+
+// Initialize with variables topic
+showTopic('variables');
+</script>
+
+</body>
+</html>
+
