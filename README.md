@@ -3,580 +3,706 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Roblox Luau Scripting Encyclopedia</title>
+<title>Roblox Luau Encyclopedia</title>
 <style>
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #121212;
-    color: #eee;
     margin: 0;
+    background: #181818;
+    color: #f0f0f0;
     display: flex;
     height: 100vh;
   }
   #sidebar {
-    width: 280px;
-    background: #1e1e1e;
+    width: 250px;
+    background: #222;
     overflow-y: auto;
-    padding: 20px;
-    box-sizing: border-box;
-    border-right: 2px solid #333;
-  }
-  #sidebar h2 {
-    margin-top: 0;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    color: #4caf50;
+    border-right: 1px solid #444;
   }
   #sidebar button {
+    display: block;
     width: 100%;
-    margin: 6px 0;
-    background: #333;
+    padding: 12px 20px;
+    background: none;
     border: none;
-    padding: 10px 15px;
-    color: #eee;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 5px;
+    color: #ccc;
     text-align: left;
+    cursor: pointer;
+    border-bottom: 1px solid #333;
+    font-weight: 600;
     text-transform: uppercase;
-    transition: background 0.3s ease;
   }
-  #sidebar button:hover, #sidebar button.active {
-    background: #4caf50;
-    color: #121212;
+  #sidebar button.active,
+  #sidebar button:hover {
+    background: #444;
+    color: #fff;
   }
   #content {
-    flex: 1;
-    padding: 30px 40px;
+    flex-grow: 1;
+    padding: 30px;
     overflow-y: auto;
-    background: #181818;
+    line-height: 1.5em;
+    max-width: 900px;
   }
   h1, h2, h3 {
-    text-transform: uppercase;
-    color: #4caf50;
-    margin-top: 1.6rem;
-    margin-bottom: 0.8rem;
+    color: #81a1c1;
   }
   pre {
-    background: #222;
-    border-radius: 8px;
-    padding: 20px;
+    background: #2e3440;
+    padding: 15px;
+    border-radius: 6px;
     overflow-x: auto;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: #cfd8dc;
-  }
-  p {
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 1.3rem;
+    margin-bottom: 25px;
+    font-size: 14px;
+    line-height: 1.3em;
   }
   code {
-    background: #333;
-    padding: 2px 5px;
-    border-radius: 3px;
     font-family: Consolas, monospace;
+    color: #d8dee9;
+  }
+  p {
+    margin-bottom: 20px;
+  }
+  ul {
+    margin-bottom: 20px;
+    padding-left: 20px;
+  }
+  ul li {
+    margin-bottom: 8px;
   }
 </style>
 </head>
 <body>
-  <nav id="sidebar">
-    <h2>Roblox Luau Topics</h2>
-    <button onclick="showTopic('variables')">Variables</button>
-    <button onclick="showTopic('printing')">Printing & Operators</button>
-    <button onclick="showTopic('ifstatements')">If Statements</button>
-    <button onclick="showTopic('loops')">Loops</button>
-    <button onclick="showTopic('functions')">Functions</button>
-    <button onclick="showTopic('tables')">Tables</button>
-    <button onclick="showTopic('events')">Events (Roblox)</button>
-    <button onclick="showTopic('remotes')">RemoteEvents & RemoteFunctions</button>
-    <button onclick="showTopic('modules')">ModuleScripts & OOP</button>
-    <button onclick="showTopic('tweenservice')">TweenService & Animations</button>
-    <button onclick="showTopic('contextaction')">ContextActionService</button>
-    <button onclick="showTopic('pathfinding')">PathfindingService</button>
-    <button onclick="showTopic('marketplace')">MarketplaceService</button>
-    <button onclick="showTopic('userdata')">User Data & DataStores</button>
-  </nav>
 
-  <main id="content">
-    <h1>Roblox Luau Scripting Encyclopedia</h1>
-    <p>Select a topic from the sidebar to get started.</p>
-  </main>
+<div id="sidebar">
+  <button data-topic="variables" class="active">Variables</button>
+  <button data-topic="printing">Printing</button>
+  <button data-topic="controlflow">Control Flow</button>
+  <button data-topic="loops">Loops</button>
+  <button data-topic="functions">Functions</button>
+  <button data-topic="tables">Tables</button>
+  <button data-topic="events">Events</button>
+  <button data-topic="remotes">Remotes</button>
+  <button data-topic="modules">Modules &amp; More</button>
+</div>
+
+<div id="content"></div>
 
 <script>
 const topics = {
   variables: `
-<h2>VARIABLES</h2>
-<p>Variables are like labeled boxes where you can store different types of data: numbers, text, true/false values, tables (arrays/dictionaries), and more. In Luau, variables are created using the <code>local</code> keyword to limit their scope to where they’re defined.</p>
+  <h2>VARIABLES</h2>
+  <p>Variables store data for your program to use. Think of them as labeled boxes that hold information such as numbers, text, or true/false values.</p>
 
-<p>Variables allow you to save data for later use in your scripts. You can change the contents of variables, use them in calculations, or print them out for debugging.</p>
+  <pre><code>-- Example Variables
+local x = 5       -- stores a number
+local name = "Ray" -- stores a string (text)
+local isCool = true -- stores a boolean (true or false)
 
-<p>Example:</p>
+print(x)        -- prints 5
+print("Hello "..name) -- prints "Hello Ray"
+  </code></pre>
 
-<pre><code>-- Create a variable storing a number
-local playerScore = 0
+  <p>Variables let you remember things and reuse them throughout your scripts. You can name variables almost anything, but not reserved Lua keywords like <code>if</code>, <code>end</code>, etc.</p>
 
--- Create a variable storing text
-local playerName = "Ray"
+  <p>Variables can be updated anytime:</p>
 
--- Update the score
-playerScore = playerScore + 10
+  <pre><code>x = 10
+print(x)  -- Now prints 10
+  </code></pre>
 
--- Print the player's name and score
-print("Player: " .. playerName .. " Score: " .. playerScore)
-</code></pre>
-
-<p>In this example, <code>playerScore</code> starts at zero and then increases by 10. We then print a message showing the player's name and score by combining strings with the <code>..</code> operator.</p>
-
-<p>Variables are fundamental for keeping track of game data like health, coins, player names, and much more.</p>
-`,
+  <p>This simple concept is the foundation for all programming in Roblox Luau.</p>
+  `,
 
   printing: `
-<h2>PRINTING & OPERATORS</h2>
-<p>Printing is how you output messages to Roblox Studio’s output window, which helps debug your scripts. You use <code>print()</code> to show simple messages, and <code>warn()</code> to output warnings in yellow.</p>
+  <h2>PRINTING</h2>
+  <p>Printing is how you show messages in Roblox’s output window, which helps with debugging and feedback.</p>
 
-<p>Operators let you do math and combine values. Common operators include:</p>
-<ul>
-  <li><code>+</code> Addition</li>
-  <li><code>-</code> Subtraction</li>
-  <li><code>*</code> Multiplication</li>
-  <li><code>/</code> Division</li>
-  <li><code>^</code> Power (exponent)</li>
-  <li><code>%</code> Modulus (remainder)</li>
-  <li><code>..</code> String concatenation</li>
-</ul>
+  <pre><code>print("Hello World")  -- Prints "Hello World" in the output
+warn("Warning message") -- Prints a yellow warning message
+error("Error message")  -- Stops the script and prints an error
+  </code></pre>
 
-<p>Example script:</p>
+  <p>You can also print variables or expressions:</p>
 
-<pre><code>local a = 7
-local b = 3
+  <pre><code>local score = 100
+print("Score is", score) -- Prints: Score is 100
+print("5 + 5 =", 5 + 5)   -- Prints: 5 + 5 = 10
+  </code></pre>
 
-print("Add: " .. (a + b))       -- prints 10
-print("Subtract: " .. (a - b))  -- prints 4
-print("Multiply: " .. (a * b))  -- prints 21
-print("Divide: " .. (a / b))    -- prints 2.3333...
-print("Power: " .. (a ^ b))     -- prints 343 (7^3)
-print("Remainder: " .. (a % b)) -- prints 1 (7 mod 3)
+  <p>Printing is your best friend for understanding what your scripts are doing during development.</p>
+  `,
 
-print("Hello " .. "World")      -- prints Hello World
+  controlflow: `
+  <h2>CONTROL FLOW</h2>
+  <p>Control flow statements decide which parts of code run based on conditions, letting your scripts respond dynamically.</p>
 
-warn("This is a warning!")      -- prints warning message in yellow
-</code></pre>
+  <pre><code>local health = 50
 
-<p>Use printing to check values during development and operators to perform math or combine strings.</p>
-`,
-
-  ifstatements: `
-<h2>IF STATEMENTS</h2>
-<p>If statements let your code make decisions based on conditions. They check whether something is true or false and run code accordingly.</p>
-
-<p>Example:</p>
-
-<pre><code>local health = 75
-
-if health > 50 then
-    print("You are healthy!")
-elseif health > 20 then
-    print("You are injured!")
+if health > 75 then
+  print("You are healthy")
+elseif health > 30 then
+  print("You are hurt")
 else
-    print("You are critically low on health!")
+  print("You are critical")
 end
-</code></pre>
+  </code></pre>
 
-<p>This checks the player’s health and prints a different message depending on how much health remains.</p>
+  <p>Use <code>if</code>, <code>elseif</code>, and <code>else</code> blocks to check multiple cases. Conditions use comparison operators like <code>==</code>, <code>~=</code> (not equals), <code>&gt;</code>, <code>&lt;</code>, etc.</p>
 
-<p>You can combine conditions using <code>and</code>, <code>or</code>, and negate them with <code>not</code> for complex logic.</p>
+  <p>You can combine conditions with logical operators <code>and</code>, <code>or</code>, and <code>not</code> for complex logic.</p>
 
-<p>Example with combined conditions:</p>
+  <pre><code>local isDay = true
+local hasFlashlight = false
 
-<pre><code>local isAdmin = true
-local isOnline = false
-
-if isAdmin and isOnline then
-    print("Welcome, admin!")
-elseif isAdmin and not isOnline then
-    print("Admin is offline")
+if isDay or hasFlashlight then
+  print("You can see")
 else
-    print("You are a guest")
+  print("It's dark!")
 end
-</code></pre>
-`,
+  </code></pre>
+
+  <p>Mastering control flow makes your games interactive and smart.</p>
+  `,
 
   loops: `
-<h2>LOOPS</h2>
-<p>Loops let you run a block of code multiple times, which is great for repeating actions like updating game states or checking conditions repeatedly.</p>
+  <h2>LOOPS</h2>
 
-<p>There are three common loops in Luau:</p>
-<ul>
-  <li><strong>For loops:</strong> Repeat a fixed number of times.</li>
-  <li><strong>While loops:</strong> Repeat while a condition is true.</li>
-  <li><strong>Repeat until loops:</strong> Repeat until a condition becomes true.</li>
-</ul>
+  <p>Loops let you run code repeatedly, which is vital for tasks like updating game states, animations, timers, or repeated checks.</p>
 
-<p>Examples:</p>
-
-<pre><code>-- For loop that counts from 1 to 5
-for i = 1, 5 do
-    print("Count: " .. i)
+  <h3>For Loops</h3>
+  <p>The most common loop runs a block a set number of times:</p>
+  <pre><code>for i = 1, 5 do
+  print("Loop count:", i)
 end
+-- Output:
+-- Loop count: 1
+-- Loop count: 2
+-- Loop count: 3
+-- Loop count: 4
+-- Loop count: 5
+</code></pre>
+  <p>This runs the code inside <code>do ... end</code> five times, with <code>i</code> changing each time.</p>
 
--- While loop that runs while count is less than 3
-local count = 0
-while count < 3 do
-    print("While loop count: " .. count)
-    count = count + 1
+  <h3>While Loops</h3>
+  <p>Use <code>while</code> to run code while a condition is true:</p>
+  <pre><code>local count = 1
+while count <= 5 do
+  print("Counting:", count)
+  count = count + 1
 end
+-- Prints numbers 1 to 5
+</code></pre>
+  <p>Be careful with while loops to avoid infinite loops which freeze your game.</p>
 
--- Repeat until loop that runs until count is 3 or more
-local count2 = 0
+  <h3>Repeat Until Loops</h3>
+  <p>Similar to <code>while</code>, but runs the block first, then checks condition after:</p>
+  <pre><code>local num = 1
 repeat
-    print("Repeat until count: " .. count2)
-    count2 = count2 + 1
-until count2 >= 3
+  print("Number:", num)
+  num = num + 1
+until num > 5
+-- Prints numbers 1 to 5
 </code></pre>
 
-<p>Loops are essential for repetitive game logic like spawning enemies, updating scores, or creating timers.</p>
-`,
+  <h3>Loop Control Statements</h3>
+  <ul>
+    <li><code>break</code>: exit a loop immediately</li>
+    <li><code>continue</code> does not exist in Lua; use conditional statements to skip iterations</li>
+  </ul>
+  <pre><code>for i = 1, 10 do
+  if i == 5 then
+    break  -- exits loop when i == 5
+  end
+  print(i)
+end
+-- Prints 1,2,3,4 then stops
+</code></pre>
+
+  <h3>Example: Looping Through Tables</h3>
+  <pre><code>local fruits = {"Apple", "Banana", "Cherry"}
+
+for index, fruit in ipairs(fruits) do
+  print("Fruit " .. index .. ": " .. fruit)
+end
+-- Prints:
+-- Fruit 1: Apple
+-- Fruit 2: Banana
+-- Fruit 3: Cherry
+</code></pre>
+
+  <h3>Practical Uses</h3>
+  <p>Loops let you do things like:</p>
+  <ul>
+    <li>Update NPC movements every frame</li>
+    <li>Check player health repeatedly</li>
+    <li>Process multiple objects or players</li>
+    <li>Generate procedural content</li>
+  </ul>
+  <p>Master loops to control repetitive behavior efficiently!</p>
+  `,
 
   functions: `
-<h2>FUNCTIONS</h2>
-<p>Functions are reusable blocks of code that can be called multiple times. They help organize your code into smaller pieces and allow you to pass in values (parameters) and get back results.</p>
+  <h2>FUNCTIONS</h2>
 
-<p>Example of a simple function without parameters:</p>
+  <p>Functions let you package reusable code blocks. Instead of writing the same code repeatedly, define a function and call it whenever needed.</p>
 
-<pre><code>function greet()
-    print("Hello, player!")
+  <h3>Declaring Functions</h3>
+  <pre><code>function greet()
+  print("Hello, Roblox!")
 end
 
-greet() -- Calls the function and prints the message
+greet()  -- Calls the function and prints the message
 </code></pre>
+  <p>Functions can also accept parameters to customize behavior:</p>
 
-<p>Example of a function with parameters:</p>
-
-<pre><code>function greetPlayer(name)
-    print("Hello, " .. name .. "!")
+  <pre><code>function greetPlayer(name)
+  print("Hello, " .. name .. "!")
 end
 
-greetPlayer("Ray") -- Prints Hello, Ray!
+greetPlayer("Ray")  -- Prints: Hello, Ray!
+greetPlayer("Alex") -- Prints: Hello, Alex!
 </code></pre>
 
-<p>Functions can return values:</p>
-
-<pre><code>function add(a, b)
-    return a + b
+  <h3>Returning Values</h3>
+  <p>Functions can return values to be used later:</p>
+  <pre><code>function add(a, b)
+  return a + b
 end
 
-local result = add(5, 3)
-print("Sum: " .. result) -- prints Sum: 8
+local result = add(5, 7)
+print(result)  -- Prints 12
 </code></pre>
 
-<p>Functions help keep your code clean, reusable, and easier to manage, especially in big projects.</p>
-`,
+  <h3>Local Functions</h3>
+  <p>Using <code>local</code> before a function limits its scope to where it’s declared:</p>
+  <pre><code>local function secret()
+  print("This is a secret function!")
+end
+
+secret()  -- Works here
+</code></pre>
+
+  <h3>Anonymous Functions</h3>
+  <p>Functions can be stored in variables or passed as arguments:</p>
+  <pre><code>local function sayHi()
+  print("Hi!")
+end
+
+local func = sayHi
+func()  -- Calls sayHi
+
+-- Passing function as callback
+game:GetService("RunService").Stepped:Connect(function(time, delta)
+  print("Frame updated")
+end)
+</code></pre>
+
+  <h3>Why Use Functions?</h3>
+  <ul>
+    <li>Organize code into logical blocks</li>
+    <li>Make scripts easier to read and maintain</li>
+    <li>Avoid repeating code</li>
+    <li>Allow reuse and modularity</li>
+  </ul>
+
+  <h3>Practical Example: Health Update Function</h3>
+  <pre><code>local playerHealth = 100
+
+function takeDamage(amount)
+  playerHealth = playerHealth - amount
+  if playerHealth < 0 then
+    playerHealth = 0
+  end
+  print("Player health now:", playerHealth)
+end
+
+takeDamage(25)  -- Health: 75
+takeDamage(50)  -- Health: 25
+takeDamage(30)  -- Health: 0 (can't go below 0)
+</code></pre>
+  `,
 
   tables: `
-<h2>TABLES</h2>
-<p>Tables are one of the most powerful data structures in Luau. They work like arrays or dictionaries and can hold many values, including other tables.</p>
+  <h2>TABLES</h2>
 
-<p>Example of an array-style table:</p>
+  <p>Tables are Luau’s powerful data structures, acting like arrays, dictionaries, or objects.</p>
 
-<pre><code>local fruits = {"Apple", "Banana", "Orange"}
+  <h3>Basic Table (Array)</h3>
+  <pre><code>local fruits = {"Apple", "Banana", "Cherry"}
 
-print(fruits[1]) -- prints Apple (Lua tables are 1-indexed)
-print(fruits[2]) -- prints Banana
+print(fruits[1])  -- Apple (Lua indexing starts at 1)
+print(#fruits)    -- 3 (length of the table)
 </code></pre>
 
-<p>Example of a dictionary-style table with key-value pairs:</p>
-
-<pre><code>local player = {
-    Name = "Ray",
-    Score = 120,
-    IsAdmin = true
+  <h3>Tables as Dictionaries</h3>
+  <p>Tables can use string keys:</p>
+  <pre><code>local player = {
+  Name = "Ray",
+  Level = 5,
+  Health = 100,
 }
 
-print(player.Name) -- prints Ray
-print(player["Score"]) -- prints 120
+print(player.Name)   -- Ray
+print(player["Level"]) -- 5
 </code></pre>
 
-<p>Tables can store anything, and you can loop through them with <code>pairs()</code> or <code>ipairs()</code>.</p>
+  <h3>Adding and Removing Keys</h3>
+  <pre><code>player.Mana = 50       -- Adds new key
+print(player.Mana)     -- 50
 
-<p>Example looping through a table:</p>
+player.Health = nil    -- Removes the Health key
+print(player.Health)   -- nil
+</code></pre>
 
-<pre><code>for index, fruit in ipairs(fruits) do
-    print(index, fruit)
+  <h3>Looping Through Tables</h3>
+  <p>Use <code>pairs()</code> to loop through keys and values:</p>
+  <pre><code>for key, value in pairs(player) do
+  print(key, value)
 end
+-- Output:
+-- Name Ray
+-- Level 5
+-- Mana 50
 </code></pre>
 
-<p>Tables are used everywhere in Roblox scripting to store collections of data like inventories, player stats, or game settings.</p>
-`,
+  <h3>Nested Tables</h3>
+  <pre><code>local gameData = {
+  Players = {
+    {Name="Ray", Score=100},
+    {Name="Alex", Score=150},
+  }
+}
+
+print(gameData.Players[2].Name)  -- Alex
+print(gameData.Players[1].Score) -- 100
+</code></pre>
+
+  <h3>Metatables &amp; Operator Overloading (Advanced)</h3>
+  <p>Metatables let you customize table behavior, like adding arithmetic or indexing magic. This is advanced, but powerful!</p>
+
+  <h3>Why Tables Matter</h3>
+  <ul>
+    <li>Store collections of items or objects</li>
+    <li>Manage complex game data</li>
+    <li>Implement classes, modules, and much more</li>
+  </ul>
+
+  <p>Understanding tables is essential to Luau scripting mastery.</p>
+  `,
 
   events: `
-<h2>EVENTS (ROBLOX SPECIFIC)</h2>
-<p>Events allow your scripts to respond to things happening in the game, such as players touching parts, joining, leaving, or other custom triggers.</p>
+  <h2>EVENTS</h2>
 
-<p>Example of the <code>Touched</code> event on a part:</p>
+  <p>Events let scripts react to things happening in the game, like player input, collisions, or timers.</p>
 
-<pre><code>local part = workspace.Part
+  <h3>Connecting to Events</h3>
+  <p>Use <code>:Connect(function)</code> to listen to an event:</p>
+  <pre><code>local part = workspace.Part
 
 part.Touched:Connect(function(hit)
-    print(hit.Name .. " touched the part!")
+  print(hit.Name .. " touched the part")
 end)
 </code></pre>
 
-<p>This script prints the name of any object that touches the part. Useful for creating traps, pickups, or interactive objects.</p>
+  <p>This prints the name of any object touching the part.</p>
 
-<p>Other common events include <code>PlayerAdded</code> (when a player joins), <code>Changed</code> (when a property changes), and many more.</p>
+  <h3>Common Roblox Events</h3>
+  <ul>
+    <li><code>Touched</code>: Part touched by something</li>
+    <li><code>Changed</code>: Property changed</li>
+    <li><code>Heartbeat</code>: Every server frame (RunService)</li>
+    <li><code>PlayerAdded</code>: Player joins game</li>
+  </ul>
 
-<p>You can connect functions to these events to run your code automatically when something happens.</p>
-`,
+  <h3>Disconnecting Events</h3>
+  <p>You can disconnect event listeners to stop them:</p>
+  <pre><code>local connection = part.Touched:Connect(function(hit)
+  print("Touched!")
+end)
+
+-- Later
+connection:Disconnect()
+</code></pre>
+
+  <h3>Custom Events with BindableEvents</h3>
+  <pre><code>local BindableEvent = Instance.new("BindableEvent")
+
+BindableEvent.Event:Connect(function(msg)
+  print("Event fired with message:", msg)
+end)
+
+BindableEvent:Fire("Hello custom event!")
+</code></pre>
+
+  <h3>Why Use Events?</h3>
+  <ul>
+    <li>Respond to game changes instantly</li>
+    <li>Write reactive, efficient code</li>
+    <li>Communicate between scripts and objects</li>
+  </ul>
+
+  <p>Events are the backbone of dynamic Roblox experiences.</p>
+  `,
 
   remotes: `
-<h2>REMOTE EVENTS & REMOTE FUNCTIONS</h2>
-<p>RemoteEvents and RemoteFunctions let the client (player's device) and the server communicate safely. This is crucial because some code must run on the server (for security), and some code runs on the client (for UI and controls).</p>
+  <h2>REMOTES</h2>
 
-<p><strong>RemoteEvent:</strong> Used to send messages from client to server or vice versa.</p>
+  <p>Remotes let the client and server communicate securely in Roblox games, essential for multiplayer functionality.</p>
 
-<pre><code>-- Server Script:
-local event = game.ReplicatedStorage.MyEvent
+  <h3>RemoteEvents</h3>
+  <p>Used for one-way communication:</p>
+  <pre><code>-- Server Script
+local remoteEvent = game.ReplicatedStorage:WaitForChild("MyRemoteEvent")
 
-event.OnServerEvent:Connect(function(player, message)
-    print(player.Name .. " says: " .. message)
+remoteEvent.OnServerEvent:Connect(function(player, message)
+  print(player.Name .. " says: " .. message)
 end)
 
--- LocalScript (Client):
-local event = game.ReplicatedStorage.MyEvent
-event:FireServer("Hello Server!")
+-- LocalScript (client)
+local remoteEvent = game.ReplicatedStorage:WaitForChild("MyRemoteEvent")
+remoteEvent:FireServer("Hello Server!")
 </code></pre>
 
-<p><strong>RemoteFunction:</strong> Used when the client needs to ask the server for information and wait for a reply.</p>
+  <h3>RemoteFunctions</h3>
+  <p>Used when client needs a response from the server:</p>
+  <pre><code>-- Server Script
+local remoteFunction = game.ReplicatedStorage:WaitForChild("MyRemoteFunction")
 
-<pre><code>-- Server Script:
-local func = game.ReplicatedStorage.MyFunction
-
-func.OnServerInvoke = function(player, query)
-    if query == "GetCoins" then
-        return 100 -- example coin count
-    else
-        return "Unknown query"
-    end
+remoteFunction.OnServerInvoke = function(player, question)
+  if question == "How are you?" then
+    return "I'm fine, thanks!"
+  else
+    return "I don't understand."
+  end
 end
 
--- LocalScript (Client):
-local func = game.ReplicatedStorage.MyFunction
-local coins = func:InvokeServer("GetCoins")
-print("You have " .. coins .. " coins.")
-</code></pre>
-
-<p>Using remotes properly helps secure your game and lets you sync data between server and client.</p>
-`,
-
-  modules: `
-<h2>MODULESCRIPTS & OBJECT-ORIENTED PROGRAMMING (OOP)</h2>
-<p>ModuleScripts let you write reusable code that can be used in many places without rewriting. They are perfect for organizing big projects by separating functionality into different modules.</p>
-
-<p>Example of a simple ModuleScript named <code>MathModule</code>:</p>
-
-<pre><code>-- MathModule
-local MathModule = {}
-
-function MathModule.Add(a, b)
-    return a + b
-end
-
-function MathModule.Multiply(a, b)
-    return a * b
-end
-
-return MathModule
-</code></pre>
-
-<p>You can use it in other scripts like this:</p>
-
-<pre><code>local Math = require(game.ReplicatedStorage.MathModule)
-
-print(Math.Add(5, 7))      -- prints 12
-print(Math.Multiply(3, 4)) -- prints 12
-</code></pre>
-
-<p>OOP is a style of programming where you create 'classes' and 'objects' to represent real-world entities or game systems. Roblox Luau supports this using metatables.</p>
-
-<p>Example of a basic class-like structure:</p>
-
-<pre><code>local Dog = {}
-Dog.__index = Dog
-
-function Dog.new(name)
-    local self = setmetatable({}, Dog)
-    self.Name = name
-    return self
-end
-
-function Dog:Bark()
-    print(self.Name .. " says: Woof!")
-end
-
-local myDog = Dog.new("Rex")
-myDog:Bark() -- prints "Rex says: Woof!"
-</code></pre>
-
-<p>Using ModuleScripts and OOP keeps your code clean, reusable, and easier to manage.</p>
-`,
-
-  tweenservice: `
-<h2>TWEENSERVICE & ANIMATIONS</h2>
-<p>TweenService is used to create smooth, animated transitions for parts, UI elements, and properties. Instead of instantly changing a property, tweening animates the change over time.</p>
-
-<p>Example: smoothly fading out a part's transparency over 2 seconds.</p>
-
-<pre><code>local TweenService = game:GetService("TweenService")
-local part = workspace.Part
-
-local tweenInfo = TweenInfo.new(
-    2, -- Duration (seconds)
-    Enum.EasingStyle.Quad,
-    Enum.EasingDirection.Out
-)
-
-local goal = {}
-goal.Transparency = 1 -- fade out
-
-local tween = TweenService:Create(part, tweenInfo, goal)
-tween:Play()
-</code></pre>
-
-<p>Tweens can be used for many cool effects like UI fades, moving platforms, scaling objects, and more.</p>
-
-<p>You can customize tween duration, easing styles (how the animation accelerates or decelerates), and repeat counts.</p>
-`,
-
-  contextaction: `
-<h2>CONTEXTACTIONSERVICE</h2>
-<p>ContextActionService lets you bind functions to player inputs like keyboard, mouse, or gamepad buttons. This is great for custom controls, shortcuts, or game mechanics.</p>
-
-<p>Example: bind the space bar to print a jump message.</p>
-
-<pre><code>local CAS = game:GetService("ContextActionService")
-
-local function onJumpAction(actionName, inputState, inputObject)
-    if inputState == Enum.UserInputState.Begin then
-        print("Jump button pressed!")
-    end
-end
-
-CAS:BindAction("JumpAction", onJumpAction, false, Enum.KeyCode.Space)
-</code></pre>
-
-<p>This script prints "Jump button pressed!" when the spacebar is pressed.</p>
-
-<p>You can bind multiple keys or buttons, disable bindings temporarily, and manage complex input schemes using ContextActionService.</p>
-`,
-
-  pathfinding: `
-<h2>PATHFINDINGSERVICE</h2>
-<p>PathfindingService helps NPCs move around obstacles by calculating a path between two points.</p>
-
-<p>Example of making an NPC move to a target using pathfinding:</p>
-
-<pre><code>local PathfindingService = game:GetService("PathfindingService")
-local npc = workspace.NPC
-local target = workspace.Target.Position
-
-local path = PathfindingService:CreatePath()
-path:ComputeAsync(npc.Position, target)
-
-if path.Status == Enum.PathStatus.Success then
-    local waypoints = path:GetWaypoints()
-    for _, waypoint in ipairs(waypoints) do
-        npc.Humanoid:MoveTo(waypoint.Position)
-        npc.Humanoid.MoveToFinished:Wait()
-    end
-else
-    print("No path found!")
-end
-</code></pre>
-
-<p>This script calculates a path for the NPC and moves it step by step along the waypoints.</p>
-
-<p>Pathfinding is essential for creating smart NPCs that navigate the world naturally.</p>
-`,
-
-  marketplace: `
-<h2>MARKETPLACESERVICE</h2>
-<p>MarketplaceService lets you integrate developer products, game passes, and other Roblox purchases into your game.</p>
-
-<p>Example: prompting a player to buy a developer product (like coins or special items):</p>
-
-<pre><code>local MarketplaceService = game:GetService("MarketplaceService")
-local productId = 12345678 -- replace with your product ID
-
-game.Players.PlayerAdded:Connect(function(player)
-    MarketplaceService:PromptProductPurchase(player, productId)
-end)
-</code></pre>
-
-<p>This shows the purchase dialog to players when they join.</p>
-
-<p>You can handle purchase processing and rewards by listening to purchase events.</p>
-`,
-
-  userdata: `
-<h2>USER DATA & DATASTORES</h2>
-<p>Saving player data (like coins, stats, inventory) is crucial for long-term games. Roblox provides DataStores to save persistent data on Roblox’s servers.</p>
-
-<p>Example: simple DataStore to save and load a player's coin count.</p>
-
-<pre><code>local DataStoreService = game:GetService("DataStoreService")
-local coinsStore = DataStoreService:GetDataStore("PlayerCoins")
-
-game.Players.PlayerAdded:Connect(function(player)
-    local userId = player.UserId
-
-    -- Load coins safely
-    local success, coins = pcall(function()
-        return coinsStore:GetAsync(userId)
-    end)
-
-    if success and coins then
-        player:SetAttribute("Coins", coins)
-        print("Loaded coins for " .. player.Name .. ": " .. coins)
-    else
-        player:SetAttribute("Coins", 0)
-    end
-end)
-
-game.Players.PlayerRemoving:Connect(function(player)
-    local userId = player.UserId
-    local coins = player:GetAttribute("Coins")
-
-    -- Save coins safely
-    pcall(function()
-        coinsStore:SetAsync(userId, coins)
-    end)
-end)
-</code></pre>
-
-<p>This script loads coins when players join and saves them when they leave, handling errors with <code>pcall</code>.</p>
-
-<p>Data persistence is complex and requires care to avoid data loss or corruption.</p>
-`
-};
-
-function showTopic(topic) {
-  const content = topics[topic];
-  if (!content) {
-    document.getElementById('content').innerHTML = '<p>Topic not found.</p>';
-    return;
+-- LocalScript (client)
+local remoteFunction = game.ReplicatedStorage:WaitForChild("MyRemoteFunction")
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Roblox Luau Encyclopedia</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background: #1e1e2f;
+    color: #ddd;
+    margin: 0;
+    padding: 0;
   }
-  document.getElementById('content').innerHTML = content;
+  header {
+    background: #27293d;
+    padding: 1rem;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #76c7c0;
+  }
+  nav {
+    background: #33354a;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  nav button {
+    background: transparent;
+    border: none;
+    color: #ddd;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+  }
+  nav button:hover,
+  nav button.active {
+    background: #76c7c0;
+    color: #1e1e2f;
+  }
+  main {
+    max-width: 900px;
+    margin: 1rem auto;
+    padding: 1rem;
+    background: #27293d;
+    border-radius: 8px;
+  }
+  section {
+    margin-bottom: 3rem;
+  }
+  section h2 {
+    border-bottom: 2px solid #76c7c0;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #76c7c0;
+  }
+  pre {
+    background: #1e1e2f;
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    color: #a1d2ce;
+  }
+  code {
+    font-family: Consolas, monospace;
+    font-size: 0.95rem;
+  }
+  p {
+    margin-bottom: 1rem;
+  }
+</style>
+</head>
+<body>
+<header>Roblox Luau Encyclopedia</header>
+<nav>
+  <button onclick="showTopic('variables')" class="active">Variables</button>
+  <button onclick="showTopic('local-variables')">Local Variables</button>
+  <button onclick="showTopic('loops')">Loops</button>
+  <button onclick="showTopic('functions')">Functions</button>
+  <button onclick="showTopic('tables')">Tables</button>
+  <button onclick="showTopic('events')">Events</button>
+  <button onclick="showTopic('remotes')">Remotes</button>
+  <button onclick="showTopic('modules')">Modules</button>
+  <!-- Add more buttons as needed -->
+</nav>
+<main id="content">
 
-  // Update active button
-  const buttons = document.querySelectorAll('#sidebar button');
-  buttons.forEach(btn => btn.classList.remove('active'));
-  const activeBtn = Array.from(buttons).find(b => b.textContent.toLowerCase().replace(/ /g, '') === topic);
-  if (activeBtn) activeBtn.classList.add('active');
-}
+<section id="variables" style="display:block;">
+  <h2>VARIABLES</h2>
+  <p>
+    Variables store data like numbers, text, or boolean values (true/false). You create a variable by using the <code>local</code> keyword followed by the variable name, an equals sign, and the value you want to store.
+  </p>
+  <pre><code>local Variable = "Hello!" -- A variable storing the text "Hello!"
+print(Variable) -- prints Hello!
+print("test") -- prints test
+warn("test") -- prints a warning message "test"
+</code></pre>
+  <p>
+    You can also do math operations with numbers in variables:
+  </p>
+  <pre><code>local number = 5
+print(number + 3) -- 8
+print(number - 2) -- 3
+print(number * 4) -- 20
+print(number / 2) -- 2.5
+</code></pre>
+</section>
 
-// Initialize to variables on page load
-showTopic('variables');
+<section id="local-variables" style="display:none;">
+  <h2>LOCAL VARIABLES</h2>
+  <p>
+    In Roblox Lua (Luau), <strong>local variables</strong> are variables that are limited in scope to the block or function where they are declared. This means they only exist and can be used within that specific part of the code. Using local variables is important for keeping your code clean and avoiding conflicts, especially in large scripts or when multiple scripts run simultaneously.
+  </p>
+  <p>
+    Declaring a variable as <code>local</code> helps Roblox optimize your code performance because it doesn’t have to look outside the local scope for the variable every time. It also protects variables from being accidentally changed by other parts of the game.
+  </p>
+  <p>
+    <strong>Example 1: Local variable inside a function</strong>
+  </p>
+  <pre><code>function greet()
+  local message = "Hello, Roblox!"
+  print(message) -- prints "Hello, Roblox!"
+end
+
+greet()
+-- print(message) -- this would cause an error because 'message' is local to the function
+</code></pre>
+  <p>
+    In this example, the variable <code>message</code> exists only inside the <code>greet</code> function. Trying to access it outside causes an error.
+  </p>
+  <p>
+    <strong>Example 2: Local variables prevent overwriting global variables</strong>
+  </p>
+  <pre><code>local score = 10 -- local variable
+
+function increaseScore()
+  local score = 5 -- this 'score' is different from the one outside
+  print("Inside function, score is: "..score) -- prints 5
+end
+
+increaseScore()
+print("Outside function, score is: "..score) -- prints 10
+</code></pre>
+  <p>
+    Here, the local <code>score</code> inside the function is separate from the one outside. This prevents unexpected changes to variables in other parts of your code.
+  </p>
+  <p>
+    <strong>Example 3: Local variables in loops</strong>
+  </p>
+  <pre><code>for i = 1, 5 do
+  local message = "Loop number "..i
+  print(message) -- prints Loop number 1, then 2, up to 5
+end
+
+-- print(message) -- error, 'message' is local inside the loop
+</code></pre>
+  <p>
+    Each loop iteration has its own local variable <code>message</code> that doesn’t exist outside the loop.
+  </p>
+  <p>
+    <strong>Summary:</strong> Always use <code>local</code> when declaring variables unless you need to make a global variable intentionally. This helps keep your code efficient, secure, and easy to debug.
+  </p>
+</section>
+
+<section id="loops" style="display:none;">
+  <h2>LOOPS</h2>
+  <p>
+    Loops help you repeat code multiple times without writing it over and over. The main types of loops in Luau are <code>for</code>, <code>while</code>, and <code>repeat until</code>.
+  </p>
+  <p>
+    <strong>For loop:</strong> repeats a block of code a set number of times.
+  </p>
+  <pre><code>for i = 1, 5 do
+  print(i) -- prints numbers 1 to 5
+end
+</code></pre>
+  <p>
+    <strong>While loop:</strong> runs as long as a condition is true.
+  </p>
+  <pre><code>local x = 1
+while x <= 5 do
+  print(x)
+  x = x + 1
+end
+</code></pre>
+  <p>
+    <strong>Repeat until loop:</strong> runs the block at least once and repeats until the condition is true.
+  </p>
+  <pre><code>local count = 1
+repeat
+  print(count)
+  count = count + 1
+until count > 5
+</code></pre>
+  <p>
+    Loops are very useful in Roblox for things like animations, checking player stats repeatedly, or spawning multiple parts.
+  </p>
+</section>
+
+<!-- Add more sections for Functions, Tables, Events, Remotes, Modules, etc. similarly -->
+
+<script>
+  function showTopic(topic) {
+    const sections = document.querySelectorAll('main section');
+    sections.forEach(section => {
+      section.style.display = 'none';
+    });
+    const selected = document.getElementById(topic);
+    if (selected) {
+      selected.style.display = 'block';
+    }
+    // Update nav active
+    const buttons = document.querySelectorAll('nav button');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    const activeBtn = Array.from(buttons).find(b => b.textContent.toLowerCase().replace(/ /g, '-') === topic);
+    if (activeBtn) activeBtn.classList.add('active');
+  }
 </script>
 </body>
 </html>
+
+
