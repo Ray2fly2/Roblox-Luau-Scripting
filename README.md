@@ -1,32 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Roblox Studio Handbook: Variables & Data Types Deep Dive</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; background: #18181b; color: #f4f4f5; margin: 0; }
-    main { max-width: 1000px; margin: auto; padding: 2rem;}
-    section { background: #23232b; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 18px #0002; margin-bottom: 2rem;}
-    h2 { color: #fbbf24; font-size: 2rem;}
-    h3 { color: #fbbf24; margin-top: 2em; font-size: 1.3rem;}
-    h4 { color: #fbbf24; margin-top: 1.2em; font-size: 1.08rem;}
-    pre { background: #18181b; border-radius: 5px; padding: 1.06rem; overflow-x: auto; margin: 1rem 0;}
-    code { font-family: 'Fira Mono', 'Consolas', monospace; color: #fbbf24; font-size: 1.05rem;}
-    .tip, .warning, .challenge, .simple, .example, .deepdive {
-      background: #23232b;
-      padding-left: 1rem;
-      margin: 1rem 0;
-      font-style: normal;
-      border-left: 4px solid #10b981;
-      color: #10b981;
-    }
-    .warning { border-color: #ef4444; color: #ef4444;}
-    .challenge { border-color: #22d3ee; color: #22d3ee;}
-    .simple { border-color: #fbbf24; color: #fbbf24; font-weight: 600;}
-    .deepdive { border-color: #6366f1; color: #a5b4fc;}
-    .example { border-color: #f59e42; color: #fbbf24;}
-  </style>
+
 </head>
 <body>
 <main>
